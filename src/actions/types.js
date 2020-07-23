@@ -1,0 +1,2 @@
+export const BLOG_POST_LIST = 'BLOG_POST_LIST';
+export const BLOG_POST_LIST_ADD = 'BLOG_POST_ADD';
