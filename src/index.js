@@ -5,8 +5,12 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
+import {tokenMiddleware} from './middleware';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(
+  reducers,
+  applyMiddleware(thunk, tokenMiddleware)
+);
 
 ReactDom.render(
   <Provider store={store}>
