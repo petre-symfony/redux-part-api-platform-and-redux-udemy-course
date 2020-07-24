@@ -11,10 +11,16 @@ class LoginForm extends React.Component {
     )
   }
 
+  onSubmit = (values) => {
+    console.log(values);
+  }
+
   render(){
+    const {handleSubmit} = this.props;
+
     return (
       <div className="text-center">
-        <form className="mt-4">
+        <form className="mt-4" onSubmit={handleSubmit(this.onSubmit)}>
           <Field name="username" label="username" type="text" component={this.renderInput}/>
           <Field name="password" label="password" type="password" component={this.renderInput}/>
           <button type="submit" className="btn btn-primary btn-big btn-block">Log In</button>
