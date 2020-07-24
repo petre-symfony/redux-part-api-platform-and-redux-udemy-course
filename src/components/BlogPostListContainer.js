@@ -9,9 +9,10 @@ class BlogPostListContainer extends React.Component {
   }
 
   render(){
-    const { posts } = this.props.posts;
+    const { posts, isFetching } = this.props.posts;
+
     return (
-      <BlogPostList posts={posts}/>
+      <BlogPostList posts={posts} isFetching={isFetching}/>
     )
   }
 }
