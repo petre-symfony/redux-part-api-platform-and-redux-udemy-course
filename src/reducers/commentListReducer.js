@@ -16,7 +16,7 @@ export default (state = {comments:null, isFetching: true}, action) => {
     case COMMENT_LIST_RECEIVED:
       state =  {
         ...state,
-        comments: action.payload,
+        comments: action.payload['hydra:member'],
         isFetching: false
       };
       return state;

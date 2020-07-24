@@ -5,6 +5,7 @@ import Message from "./Message";
 class CommentList extends React.Component{
   render() {
     const { comments } = this.props;
+    console.log(comments);
 
     if(null === comments || comments.length === 0){
       return <Message message="No comments exist for this post" />
@@ -12,7 +13,21 @@ class CommentList extends React.Component{
 
     return (
       <div className="card mb-3 mt-3 shadow-sm">
-        Not done yet
+        {comments.map(comment => {
+          return (
+            <div className="card-body border-bottom" key={comment.id}>
+              <p className="card-text mb-0">
+                {comment.content}
+              </p>
+              <p className="card-text">
+                <small className="text-muted">
+                  {format(comment.created)} by &nbsp;
+                  {comment.author.username}
+                </small>
+              </p>
+            </div>
+          );
+        })}
       </div>
     );
   }
