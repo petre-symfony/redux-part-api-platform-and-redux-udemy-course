@@ -5,7 +5,6 @@ import Message from "./Message";
 class CommentList extends React.Component{
   render() {
     const { comments } = this.props;
-    console.log(comments);
 
     if(null === comments || comments.length === 0){
       return <Message message="No comments exist for this post" />
