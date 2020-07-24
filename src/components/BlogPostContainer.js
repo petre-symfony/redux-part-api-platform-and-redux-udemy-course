@@ -3,6 +3,7 @@ import { blogPostFetch, blogPostUnload } from "../actions";
 import { connect } from 'react-redux';
 import BlogPost from "./BlogPost";
 import Spinner from "./Spinner";
+import CommentListContainer from "./CommentListContainer";
 
 class BlogPostContainer extends React.Component{
   componentDidMount() {
@@ -23,7 +24,10 @@ class BlogPostContainer extends React.Component{
     }
 
     return (
-      <BlogPost post={post} isFetching={isFetching} />
+      <div>
+        <BlogPost post={post} />
+        {post && <CommentListContainer blogPostId={this.props.match.params.id} />}
+      </div>
     )
   }
 }

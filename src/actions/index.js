@@ -3,7 +3,10 @@ import {
   BLOG_POST_LIST_ERROR,
   BLOG_POST_RECEIVED,
   BLOG_POST_ERROR,
-  BLOG_POST_UNLOAD
+  BLOG_POST_UNLOAD,
+  COMMENT_LIST_RECEIVED,
+  COMMENT_LIST_ERROR,
+  COMMENT_LIST_UNLOAD
 } from "./types";
 import requests from '../agent';
 
@@ -43,5 +46,26 @@ export const blogPostReceived = (data) => ({
 
 export const blogPostUnload = () => ({
   type: BLOG_POST_UNLOAD
+});
+
+export const commentListFetch = (id) => (dispatch) => {
+  requests.get(`/blog_posts/${id}/comments`)
+    .then(response => dispatch({type: COMMENT_LIST_RECEIVED, payload: response}))
+    .catch(error => dispatch({type: COMMENT_LIST_ERROR, payload: error}))
+  ;
+}
+
+export const commentListError = (error) => ({
+  type: COMMENT_LIST_ERROR,
+  payload: error
+})
+
+export const commentListReceived = (data) => ({
+  type: COMMENT_LIST_RECEIVED,
+  payload: data
+});
+
+export const commentListUnload = () => ({
+  type: COMMENT_LIST_UNLOAD
 });
 
