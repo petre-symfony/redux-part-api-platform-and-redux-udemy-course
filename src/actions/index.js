@@ -1,28 +1,24 @@
-import {BLOG_POST_LIST, BLOG_POST_LIST_ADD} from "./types";
+import {
+  BLOG_POST_LIST_REQUEST,
+  BLOG_POST_LIST_ADD,
+  BLOG_POST_LIST_RECEIVED,
+  BLOG_POST_LIST_ERROR
+} from "./types";
+import requests from '../agent';
 
-export const fetchBlogPosts = () => {
-  return {
-    type: BLOG_POST_LIST,
-    payload: [
-      {
-        id: 7,
-        title: "Hello"
-      },
-      {
-        id: 8,
-        title: "Hello girl"
-      }
-    ]
-  }
+export const blogPostsListFetch = () => (dispatch) => {
+  requests.get('/blog_posts')
+    .then(response => dispatch({type: BLOG_POST_LIST_RECEIVED, payload: response}))
+    .catch(error => dispatch({type: BLOG_POST_LIST_ERROR, payload: error}))
+  ;
 }
 
-export const addBlogPosts = () => {
-  return {
-    type: BLOG_POST_LIST_ADD,
-    payload:
-      {
-        id: 9,
-        title: "Newly added blog"
-      }
-  }
-}
+export const blogPostListError = (error) => ({
+  type: BLOG_POST_LIST_ERROR,
+  payload: error
+})
+
+export const blogPostListReceived = (data) => ({
+  type: BLOG_POST_LIST_RECEIVED,
+  payload: data
+});

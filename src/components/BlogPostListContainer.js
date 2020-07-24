@@ -1,13 +1,11 @@
 import React from 'react';
 import BlogPostList from "./BlogPostList";
 import { connect } from 'react-redux';
-import { fetchBlogPosts, addBlogPosts } from '../actions';
-import requests from '../agent';
+import { blogPostsListFetch } from '../actions';
 
 class BlogPostListContainer extends React.Component {
   componentDidMount() {
-    requests.get('/blog_posts').then(response => console.log(response));
-    this.props.fetchBlogPosts();
+    this.props.blogPostsListFetch();
   }
 
   render(){
@@ -23,5 +21,5 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps,
-  { fetchBlogPosts, addBlogPosts }
+  { blogPostsListFetch }
 )(BlogPostListContainer);
