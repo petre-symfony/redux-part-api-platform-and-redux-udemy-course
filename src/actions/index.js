@@ -2,7 +2,8 @@ import {
   BLOG_POST_LIST_RECEIVED,
   BLOG_POST_LIST_ERROR,
   BLOG_POST_RECEIVED,
-  BLOG_POST_ERROR
+  BLOG_POST_ERROR,
+  BLOG_POST_UNLOAD
 } from "./types";
 import requests from '../agent';
 
@@ -39,3 +40,8 @@ export const blogPostReceived = (data) => ({
   type: BLOG_POST_RECEIVED,
   payload: data
 });
+
+export const blogPostUnload = () => ({
+  type: BLOG_POST_UNLOAD
+});
+

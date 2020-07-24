@@ -1,7 +1,8 @@
 import {
   BLOG_POST_REQUEST,
   BLOG_POST_ERROR,
-  BLOG_POST_RECEIVED
+  BLOG_POST_RECEIVED,
+  BLOG_POST_UNLOAD
 } from "../actions/types";
 
 export default (state = {post:null, isFetching: true}, action) => {
@@ -20,6 +21,12 @@ export default (state = {post:null, isFetching: true}, action) => {
       };
       return state;
     case BLOG_POST_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        post: null
+      }
+    case BLOG_POST_UNLOAD:
       return {
         ...state,
         isFetching: false,

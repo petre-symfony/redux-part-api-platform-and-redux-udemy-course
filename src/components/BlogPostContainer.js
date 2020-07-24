@@ -1,5 +1,5 @@
 import React from "react";
-import { blogPostFetch } from "../actions";
+import { blogPostFetch, blogPostUnload } from "../actions";
 import { connect } from 'react-redux';
 import BlogPost from "./BlogPost";
 
@@ -8,8 +8,12 @@ class BlogPostContainer extends React.Component{
     this.props.blogPostFetch(this.props.match.params.id);
   }
 
+  componentWillUnmount() {
+    this.props.blogPostUnload();
+  }
+
   render(){
-    const { post, isFetching } = this.props.post;
+    const { post, isFetching } = this.props;
 
     return (
       <BlogPost post={post} isFetching={isFetching} />
@@ -17,11 +21,11 @@ class BlogPostContainer extends React.Component{
   }
 }
 
-const mapStateToProps = (state) => {
-  return {post: state.post};
-}
+const mapStateToProps = (state) => ({
+  ...state.blogPost
+})
 
 export default connect(
   mapStateToProps,
-  { blogPostFetch }
+  { blogPostFetch, blogPostUnload }
 )(BlogPostContainer);
