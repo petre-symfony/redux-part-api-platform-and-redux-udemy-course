@@ -9,7 +9,7 @@ class BlogPostListContainer extends React.Component {
   }
 
   render(){
-    const { posts, isFetching } = this.props.posts;
+    const { posts, isFetching } = this.props;
 
     return (
       <BlogPostList posts={posts} isFetching={isFetching}/>
@@ -17,9 +17,9 @@ class BlogPostListContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {posts: state.posts};
-}
+const mapStateToProps = (state) => ({
+  ...state.blogPostList
+})
 export default connect(
   mapStateToProps,
   { blogPostsListFetch }

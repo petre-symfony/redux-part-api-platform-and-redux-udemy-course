@@ -26,7 +26,8 @@ class BlogPostList extends React.Component {
                 <Link to={`blog_posts/${post.id}`}>{post.title}</Link>
                 <p className="bordet-top card-text">
                   <small className="text-muted">
-                    {format(post.createdAt)}
+                    {format(post.created)} by &nbsp;
+                    {post.author.username}
                   </small>
                 </p>
               </div>
