@@ -1,5 +1,7 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import { connect } from 'react-redux';
+import {userLoginAttempt} from "../actions";
 
 class LoginForm extends React.Component {
   renderInput({ input, label, type, meta: {error} }){
@@ -13,6 +15,10 @@ class LoginForm extends React.Component {
 
   onSubmit = (values) => {
     console.log(values);
+    return this.props.userLoginAttempt(
+      values.username,
+      values.password
+    )
   }
 
   render(){
@@ -31,4 +37,7 @@ class LoginForm extends React.Component {
 }
 export default reduxForm({
   form: 'LoginForm'
-})(LoginForm);
+})(connect(
+  null,
+  { userLoginAttempt }
+)(LoginForm));
