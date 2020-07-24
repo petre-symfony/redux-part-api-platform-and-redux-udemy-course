@@ -2,6 +2,7 @@ import React from "react";
 import { blogPostFetch, blogPostUnload } from "../actions";
 import { connect } from 'react-redux';
 import BlogPost from "./BlogPost";
+import Spinner from "./Spinner";
 
 class BlogPostContainer extends React.Component{
   componentDidMount() {
@@ -14,6 +15,12 @@ class BlogPostContainer extends React.Component{
 
   render(){
     const { post, isFetching } = this.props;
+
+    if(isFetching){
+      return (
+        <Spinner />
+      );
+    }
 
     return (
       <BlogPost post={post} isFetching={isFetching} />

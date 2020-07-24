@@ -1,19 +1,13 @@
 import React from "react";
-import {format} from 'timeago.js'
+import {format} from 'timeago.js';
+import Message from "./Message";
 
 class BlogPost extends React.Component{
   render() {
-    const { post, isFetching } = this.props;
-    console.log(post);
-
-    if(isFetching){
-      return (
-        <div><i className="fa fa-spinner fa-spin"></i></div>
-      );
-    }
+    const { post } = this.props;
 
     if(null === post ){
-      return <div>No blog post found</div>
+      return <Message message="No blog post exist" />
     }
 
     return (
