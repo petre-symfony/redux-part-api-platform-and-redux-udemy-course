@@ -3,9 +3,6 @@ import { format } from 'timeago.js';
 import { Link } from "react-router-dom";
 
 class BlogPostList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render(){
     const { posts, isFetching } = this.props;
