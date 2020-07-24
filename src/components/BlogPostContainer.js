@@ -1,6 +1,7 @@
 import React from "react";
 import { blogPostFetch } from "../actions";
 import { connect } from 'react-redux';
+import BlogPost from "./BlogPost";
 
 class BlogPostContainer extends React.Component{
   componentDidMount() {
@@ -8,8 +9,10 @@ class BlogPostContainer extends React.Component{
   }
 
   render(){
+    const { post, isFetching } = this.props.post;
+
     return (
-      <div>Returned from blog post</div>
+      <BlogPost post={post} isFetching={isFetching} />
     )
   }
 }
