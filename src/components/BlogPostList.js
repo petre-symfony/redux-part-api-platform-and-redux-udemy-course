@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'timeago.js'
 
 class BlogPostList extends React.Component {
   constructor(props) {
@@ -21,7 +22,18 @@ class BlogPostList extends React.Component {
     return (
       <div>
         <ul>
-          {posts && posts.map(post => <li key={post.id}>{post.title}</li>)}
+          {posts && posts.map(post => (
+            <div className="card mb-3 mt-3 shadow-sm" key={post.id}>
+              <div className="card-body">
+                <h3>{post.title}</h3>
+                <p className="bordet-top card-text">
+                  <small className="text-muted">
+                    {format(post.createdAt)}
+                  </small>
+                </p>
+              </div>
+            </div>
+          ))}
         </ul>
       </div>
     )
