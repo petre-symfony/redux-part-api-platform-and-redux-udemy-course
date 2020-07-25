@@ -5,11 +5,9 @@ import {userLoginAttempt} from "../actions";
 
 class LoginForm extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
-    //if(prevProps.token !== this.props.token){
-      console.log(prevProps);
-      console.log(this.props);
+    if(prevProps.token !== this.props.token){
       this.props.history.push("/");
-    //}
+    }
   }
 
   renderInput({ input, label, type, meta: {error} }){
@@ -29,10 +27,12 @@ class LoginForm extends React.Component {
   }
 
   render(){
-    const {handleSubmit} = this.props;
+    const {handleSubmit, error} = this.props;
+    console.log(this.props);
 
     return (
       <div className="text-center">
+        {error && <div className="alert alert-danger">{error}</div>}
         <form className="mt-4" onSubmit={handleSubmit(this.onSubmit)}>
           <Field name="username" label="username" type="text" component={this.renderInput}/>
           <Field name="password" label="password" type="password" component={this.renderInput}/>
