@@ -69,7 +69,7 @@ export const commentListUnload = () => ({
 });
 
 export const userLoginAttempt = (username, password) => (dispatch) => (
-  requests.post('/login_check', {username, password})
+  requests.post('/login_check', {username, password}, false)
     .then(response => dispatch(userLoginSuccess(response.token, response.id)))
     .catch(error => {console.log('Login failed')})
 );

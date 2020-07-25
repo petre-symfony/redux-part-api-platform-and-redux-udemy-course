@@ -7,16 +7,20 @@ const responseBody = response => response.body;
 
 let token = null;
 
-const tokenPlugin = (request) => {
-  request.set('Authorization', `Bearer ${token}`);
+const tokenPlugin = secured => {
+  return (request) => {
+    if(token && secured) {
+      request.set('Authorization', `Bearer ${token}`);
+    }
+  }
 }
 
 const requests = {
-  get: (url) =>
-    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin)
+  get: (url, secured=false) =>
+    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin(secured))
       .then(responseBody),
-  post: (url, body=null) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin)
+  post: (url, body=null, secured=true) =>
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin(secured))
       .then(responseBody),
   setToken: (newJwtToken) => token = newJwtToken
 }
