@@ -6,7 +6,8 @@ import {
   BLOG_POST_UNLOAD,
   COMMENT_LIST_RECEIVED,
   COMMENT_LIST_ERROR,
-  COMMENT_LIST_UNLOAD
+  COMMENT_LIST_UNLOAD,
+  USER_LOGIN_SUCCESS
 } from "./types";
 import requests from '../agent';
 
@@ -69,6 +70,12 @@ export const commentListUnload = () => ({
 
 export const userLoginAttempt = (username, password) => (dispatch) => (
   requests.post('/login_check', {username, password})
-    .then(response => {console.log(response)})
+    .then(response => dispatch(userLoginSuccess(response.token, response.id)))
     .catch(error => {console.log('Login failed')})
-)
+);
+
+export const userLoginSuccess = (token, userId) => ({
+  type: USER_LOGIN_SUCCESS,
+  token,
+  userId
+})
