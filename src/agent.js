@@ -5,13 +5,20 @@ const superagent = superagentPromise(_superagent, global.Promise);
 const API_ROOT = 'http://localhost:8000/api';
 const responseBody = response => response.body;
 
+let token = null;
+
+const tokenPlugin = (request) => {
+  request.set('Authorization', `Bearer ${token}`);
+}
+
 const requests = {
   get: (url) =>
-    superagent.get(`${API_ROOT}${url}`)
+    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin)
       .then(responseBody),
   post: (url, body=null) =>
-    superagent.post(`${API_ROOT}${url}`, body)
-      .then(responseBody)
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin)
+      .then(responseBody),
+  setToken: (newJwtToken) => token = newJwtToken
 }
 
 export default requests;
