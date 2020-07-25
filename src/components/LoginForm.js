@@ -4,6 +4,14 @@ import { connect } from 'react-redux';
 import {userLoginAttempt} from "../actions";
 
 class LoginForm extends React.Component {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevProps.token !== this.props.token){
+      console.log(prevProps);
+      console.log(this.props);
+      this.props.history.push("/");
+    }
+  }
+
   renderInput({ input, label, type, meta: {error} }){
     return (
       <div className="form-group">
@@ -14,7 +22,6 @@ class LoginForm extends React.Component {
   }
 
   onSubmit = (values) => {
-    console.log(values);
     return this.props.userLoginAttempt(
       values.username,
       values.password
@@ -35,9 +42,14 @@ class LoginForm extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  ...state.auth
+})
+
 export default reduxForm({
   form: 'LoginForm'
 })(connect(
-  null,
+  mapStateToProps,
   { userLoginAttempt }
 )(LoginForm));
