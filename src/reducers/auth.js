@@ -24,7 +24,9 @@ export default (state= {
         userId: action.userId,
         userData:
           state.userId === action.userId && state.userData === null
-          ? action.userData : null
+          ? action.userData : null,
+        isAuthenticated:
+          state.userId === action.userId && state.userData === null
       }
     default:
       return state

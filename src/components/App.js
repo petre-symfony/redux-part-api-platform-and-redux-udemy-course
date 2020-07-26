@@ -18,12 +18,19 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const {userProfileFetch} = this.props;
+    const userId = window.localStorage.getItem('userId');
+
+    if(userId){
+      userProfileFetch(userId);
+    }
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { userId, userProfileFetch } = this.props;
 
     if(prevProps.userId !== userId && userId !== null){
-      console.log(`Old user ${prevProps.userId}`);
-      console.log(`New user ${userId}`);
       userProfileFetch(userId);
     }
   }
