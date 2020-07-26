@@ -1,8 +1,9 @@
 import React from "react";
-import { commentListFetch, commentListUnload } from "../actions";
 import { connect } from 'react-redux';
+import { commentListFetch, commentListUnload } from "../actions";
 import Spinner from "./Spinner";
 import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 class CommentListContainer extends React.Component{
   componentDidMount() {
@@ -14,7 +15,7 @@ class CommentListContainer extends React.Component{
   }
 
   render(){
-    const { comments, isFetching } = this.props;
+    const { comments, isFetching, isAuthenticated } = this.props;
 
     if(isFetching){
       return (
@@ -23,13 +24,17 @@ class CommentListContainer extends React.Component{
     }
 
     return (
-      <CommentList comments={comments} />
+      <div>
+        <CommentList comments={comments} />
+        {isAuthenticated  && <CommentForm/>}
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  ...state.commentList
+  ...state.commentList,
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(
