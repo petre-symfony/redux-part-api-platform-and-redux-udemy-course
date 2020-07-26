@@ -1,5 +1,5 @@
 import React from "react";
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { reduxForm, Field, SubmissionError, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderField } from "../form";
 import { commentAdd } from '../actions';
@@ -7,9 +7,9 @@ import { commentAdd } from '../actions';
 class CommentForm extends React.Component {
 
   onSubmit = (values) => {
-    const {commentAdd, blogPostId} = this.props;
+    const {commentAdd, blogPostId, reset } = this.props;
 
-    return commentAdd(values.content, blogPostId);
+    return commentAdd(values.content, blogPostId).then(() => reset());
   }
 
   render(){
