@@ -2,14 +2,14 @@ import React from "react";
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderField } from "../form";
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+import { commentAdd } from '../actions';
 
 class CommentForm extends React.Component {
+
   onSubmit = (values) => {
-    return sleep(5000).then(() => {
-      throw new SubmissionError({content: 'Invalid Coment'});
-    });
+    const {commentAdd, blogPostId} = this.props;
+
+    return commentAdd(values.content, blogPostId);
   }
 
   render(){
@@ -28,11 +28,12 @@ class CommentForm extends React.Component {
   }
 }
 
+
 export default reduxForm({
   'form': 'CommentForm'
 })(
   connect(
     null,
-    null
+    { commentAdd }
   )(CommentForm)
 );

@@ -7,10 +7,10 @@ import {
   COMMENT_LIST_RECEIVED,
   COMMENT_LIST_ERROR,
   COMMENT_LIST_UNLOAD,
+  COMMENT_ADD,
   USER_LOGIN_SUCCESS,
-  USER_PROFILE_REQUEST,
-  USER_PROFILE_ERROR,
   USER_PROFILE_RECEIVED,
+  USER_PROFILE_ERROR,
   USER_SET_ID
 } from "./types";
 import requests from '../agent';
@@ -73,6 +73,19 @@ export const commentListUnload = () => ({
   type: COMMENT_LIST_UNLOAD
 });
 
+export const commentAdd = (comment, blogPostId) => dispatch => (
+   requests.post('/comments', {
+     content: comment,
+     post: `/api/blog_posts/${blogPostId}`
+   })
+     .then(response => dispatch(commentAdded(response)))
+);
+
+export const commentAdded = (comment) => ({
+  type: COMMENT_ADD,
+  comment
+});
+
 export const userLoginAttempt = (username, password) => (dispatch) => (
   requests.post('/login_check', {username, password}, false)
     .then(response => dispatch(userLoginSuccess(response.token, response.userId)))
@@ -104,10 +117,6 @@ export const userProfileReceived = (userId, userData) => ({
 export const userProfileError = () => ({
   type: USER_PROFILE_ERROR
 })
-
-export const userProfileRequest = () => ({
-  type: USER_PROFILE_REQUEST
-});
 
 export const userSetId = (userId) => ({
   type: USER_SET_ID,

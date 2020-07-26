@@ -15,7 +15,7 @@ class CommentListContainer extends React.Component{
   }
 
   render(){
-    const { comments, isFetching, isAuthenticated } = this.props;
+    const { comments, isFetching, isAuthenticated, blogPostId } = this.props;
 
     if(isFetching){
       return (
@@ -26,7 +26,7 @@ class CommentListContainer extends React.Component{
     return (
       <div>
         <CommentList comments={comments} />
-        {isAuthenticated  && <CommentForm/>}
+        {isAuthenticated  && <CommentForm blogPostId={blogPostId}/>}
       </div>
     )
   }
