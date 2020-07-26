@@ -7,6 +7,7 @@ import BlogPostListContainer from "./BlogPostListContainer";
 import BlogPostContainer from "./BlogPostContainer";
 import Header from "./Header";
 import requests from "../agent";
+import { userProfileFetch } from '../actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,9 +18,18 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { userId, userProfileFetch } = this.props;
+
+    if(prevProps.userId !== userId && userId !== null){
+      console.log(`Old user ${prevProps.userId}`);
+      console.log(`New user ${userId}`);
+      userProfileFetch(userId);
+    }
+  }
+
   render(){
     const { isAuthenticated } = this.props;
-
     return (
       <div>
         <Router history={history}>
@@ -37,4 +47,7 @@ const mapStateToProps = (state) => ({
   ...state.auth
 });
 
-export default connect(mapStateToProps, null)(App);
+export default connect(
+  mapStateToProps,
+  { userProfileFetch }
+)(App);

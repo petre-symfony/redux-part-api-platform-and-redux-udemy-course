@@ -1,4 +1,7 @@
-import {USER_LOGIN_SUCCESS} from '../actions/types';
+import {
+  USER_LOGIN_SUCCESS,
+  USER_PROFILE_RECEIVED
+} from '../actions/types';
 
 export default (state= {
   token: null,
@@ -7,10 +10,11 @@ export default (state= {
 }, action) => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS:
+      console.log(state);
       return {
         ...state,
         token: action.token,
-        id: action.userId,
+        userId: action.userId,
         isAuthenticated: true
       }
     default:

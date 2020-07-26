@@ -7,7 +7,10 @@ import {
   COMMENT_LIST_RECEIVED,
   COMMENT_LIST_ERROR,
   COMMENT_LIST_UNLOAD,
-  USER_LOGIN_SUCCESS
+  USER_LOGIN_SUCCESS,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_ERROR,
+  USER_PROFILE_RECEIVED
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -71,7 +74,7 @@ export const commentListUnload = () => ({
 
 export const userLoginAttempt = (username, password) => (dispatch) => (
   requests.post('/login_check', {username, password}, false)
-    .then(response => dispatch(userLoginSuccess(response.token, response.id)))
+    .then(response => dispatch(userLoginSuccess(response.token, response.userId)))
     .catch(error => {
       throw new SubmissionError({
         _error: 'Username or password is invalid'
@@ -83,4 +86,25 @@ export const userLoginSuccess = (token, userId) => ({
   type: USER_LOGIN_SUCCESS,
   token,
   userId
+});
+
+export const userProfileFetch = userId => dispatch => (
+  requests.get(`/users/${userId}`, true)
+    .then(response => dispatch(userProfileReceived(response)))
+    .catch(error => dispatch(userProfileError()))
+);
+
+export const userProfileReceived = (userData) => ({
+  type: USER_PROFILE_RECEIVED,
+  userData
+});
+
+export const userProfileError = () => ({
+  type: USER_PROFILE_ERROR
 })
+
+export const userProfileRequest = () => ({
+  type: USER_PROFILE_REQUEST
+});
+
+

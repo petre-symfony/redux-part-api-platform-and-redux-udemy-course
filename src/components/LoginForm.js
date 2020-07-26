@@ -6,8 +6,6 @@ import {userLoginAttempt} from "../actions";
 class LoginForm extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if(prevProps.token !== this.props.token){
-      console.log(prevProps);
-      console.log(this.props);
       this.props.history.push("/");
     }
   }
