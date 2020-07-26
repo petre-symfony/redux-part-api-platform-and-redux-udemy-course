@@ -6,6 +6,7 @@ import {
 export default (state= {
   token: null,
   userId: null,
+  userData: null,
   isAuthenticated: false
 }, action) => {
   switch (action.type) {
@@ -16,6 +17,14 @@ export default (state= {
         token: action.token,
         userId: action.userId,
         isAuthenticated: true
+      }
+    case USER_PROFILE_RECEIVED:
+      return {
+        ...state,
+        userId: action.userId,
+        userData:
+          state.userId === action.userId && state.userData === null
+          ? action.userData : null
       }
     default:
       return state

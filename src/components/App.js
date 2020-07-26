@@ -29,11 +29,11 @@ class App extends React.Component {
   }
 
   render(){
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, userData } = this.props;
     return (
       <div>
         <Router history={history}>
-          <Header isAuthenticated={isAuthenticated}/>
+          <Header isAuthenticated={isAuthenticated} userData={userData}/>
           <Route path="/" exact component={BlogPostListContainer} />
           <Route path="/login" exact component={LoginForm}/>
           <Route path="/blog_posts/:id" exact component={BlogPostContainer}/>

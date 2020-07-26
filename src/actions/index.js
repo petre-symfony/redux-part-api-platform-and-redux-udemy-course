@@ -90,13 +90,14 @@ export const userLoginSuccess = (token, userId) => ({
 
 export const userProfileFetch = userId => dispatch => (
   requests.get(`/users/${userId}`, true)
-    .then(response => dispatch(userProfileReceived(response)))
+    .then(response => dispatch(userProfileReceived(userId, response)))
     .catch(error => dispatch(userProfileError()))
 );
 
-export const userProfileReceived = (userData) => ({
+export const userProfileReceived = (userId, userData) => ({
   type: USER_PROFILE_RECEIVED,
-  userData
+  userData,
+  userId
 });
 
 export const userProfileError = () => ({
