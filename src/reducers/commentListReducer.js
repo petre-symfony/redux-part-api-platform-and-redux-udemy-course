@@ -2,7 +2,8 @@ import {
   COMMENT_LIST_REQUEST,
   COMMENT_LIST_RECEIVED,
   COMMENT_LIST_ERROR,
-  COMMENT_LIST_UNLOAD
+  COMMENT_LIST_UNLOAD,
+  COMMENT_ADD
 } from "../actions/types";
 
 export default (state = {comments:null, isFetching: true}, action) => {
@@ -13,6 +14,11 @@ export default (state = {comments:null, isFetching: true}, action) => {
         isFetching: true
       };
       return state;
+    case COMMENT_ADD:
+      return {
+        ...state,
+        comments: [action.comment, ...state.comments]
+      }
     case COMMENT_LIST_RECEIVED:
       state =  {
         ...state,
