@@ -10,7 +10,8 @@ import {
   USER_LOGIN_SUCCESS,
   USER_PROFILE_REQUEST,
   USER_PROFILE_ERROR,
-  USER_PROFILE_RECEIVED
+  USER_PROFILE_RECEIVED,
+  USER_SET_ID
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -107,5 +108,10 @@ export const userProfileError = () => ({
 export const userProfileRequest = () => ({
   type: USER_PROFILE_REQUEST
 });
+
+export const userSetId = (userId) => ({
+  type: USER_SET_ID,
+  userId
+})
 
 

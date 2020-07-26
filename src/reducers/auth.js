@@ -1,6 +1,7 @@
 import {
   USER_LOGIN_SUCCESS,
-  USER_PROFILE_RECEIVED
+  USER_PROFILE_RECEIVED,
+  USER_SET_ID
 } from '../actions/types';
 
 export default (state= {
@@ -17,6 +18,11 @@ export default (state= {
         token: action.token,
         userId: action.userId,
         isAuthenticated: true
+      }
+    case USER_SET_ID:
+      return {
+        ...state,
+        userId: action.userId
       }
     case USER_PROFILE_RECEIVED:
       return {
