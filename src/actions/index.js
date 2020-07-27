@@ -11,7 +11,8 @@ import {
   USER_LOGIN_SUCCESS,
   USER_PROFILE_RECEIVED,
   USER_PROFILE_ERROR,
-  USER_SET_ID
+  USER_SET_ID,
+  USER_LOGOUT
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -104,6 +105,10 @@ export const userLoginSuccess = (token, userId) => ({
   type: USER_LOGIN_SUCCESS,
   token,
   userId
+});
+
+export const userLogout = () => ({
+  type: USER_LOGOUT
 });
 
 export const userProfileFetch = userId => dispatch => (

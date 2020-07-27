@@ -7,7 +7,7 @@ import BlogPostListContainer from "./BlogPostListContainer";
 import BlogPostContainer from "./BlogPostContainer";
 import Header from "./Header";
 import requests from "../agent";
-import { userProfileFetch, userSetId } from '../actions';
+import { userProfileFetch, userSetId, userLogout } from '../actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,11 +36,11 @@ class App extends React.Component {
   }
 
   render(){
-    const { isAuthenticated, userData } = this.props;
+    const { isAuthenticated, userData, userLogout } = this.props;
     return (
       <div>
         <Router history={history}>
-          <Header isAuthenticated={isAuthenticated} userData={userData}/>
+          <Header isAuthenticated={isAuthenticated} userData={userData} logout={userLogout}/>
           <Route path="/" exact component={BlogPostListContainer} />
           <Route path="/login" exact component={LoginForm}/>
           <Route path="/blog_posts/:id" exact component={BlogPostContainer}/>
@@ -56,5 +56,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { userProfileFetch, userSetId }
+  { userProfileFetch, userSetId, userLogout }
 )(App);
