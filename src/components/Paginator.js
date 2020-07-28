@@ -13,27 +13,31 @@ class Paginator extends React.Component{
   }
   render(){
     return (
-      <nav>
-        <ul className="pagination">
-          <li className="page-item">
-            <button className="page-link">Previous</button>
-          </li>
-          {
-            this.range.map(page => {
-              return (
-                <li key={ page } className="page-item">
-                  <button className="page-link">
-                    {page}
-                  </button>
-                </li>
-              )
-            })
-          }
-          <li className="page-item">
-            <button className="page-link">Next</button>
-          </li>
-        </ul>
-      </nav>
+      <div className="card mb-3 mt-3 shadow-sm">
+        <div className="card-body">
+          <nav>
+            <ul className="pagination">
+              <li className="page-item">
+                <button className="page-link">Previous</button>
+              </li>
+              {
+                this.range.map(page => {
+                  return (
+                    <li key={ page } className="page-item">
+                      <button className="page-link">
+                        {page}
+                      </button>
+                    </li>
+                  )
+                })
+              }
+              <li className="page-item">
+                <button className="page-link">Next</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     )
   }
 }

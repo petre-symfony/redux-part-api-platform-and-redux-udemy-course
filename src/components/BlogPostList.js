@@ -13,8 +13,7 @@ class BlogPostList extends React.Component {
     }
 
     return (
-      <div>
-        <ul>
+      <div className="mr-4 ml-4">
           {posts && posts.map(post => (
             <div className="card mb-3 mt-3 shadow-sm" key={post.id}>
               <div className="card-body">
@@ -28,7 +27,6 @@ class BlogPostList extends React.Component {
               </div>
             </div>
           ))}
-        </ul>
       </div>
     )
   }
