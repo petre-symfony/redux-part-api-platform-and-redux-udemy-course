@@ -7,7 +7,7 @@ import Paginator from "./Paginator";
 
 class BlogPostListContainer extends React.Component {
   componentDidMount() {
-    this.props.blogPostsListFetch();
+    this.props.blogPostsListFetch(this.getQueryParamPage());
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -16,7 +16,7 @@ class BlogPostListContainer extends React.Component {
     if(prevProps.match.params.page !== this.getQueryParamPage()){
       blogPostListSetPage(this.getQueryParamPage());
     }
-    
+
     if(prevProps.currentPage !== currentPage){
       blogPostsListFetch(currentPage);
     }
@@ -24,6 +24,13 @@ class BlogPostListContainer extends React.Component {
 
   getQueryParamPage = () => {
     return Number(this.props.match.params.page) || 1;
+  }
+
+  changePage = (page) => {
+    const {history, blogPostListSetPage} = this.props;
+
+    blogPostListSetPage(page);
+    history.push(`/${page}`);
   }
 
   render(){
@@ -38,7 +45,7 @@ class BlogPostListContainer extends React.Component {
     return (
       <div>
         <BlogPostList posts={posts}/>
-        <Paginator currentPage={currentPage} pageCount={10} setPage={blogPostListSetPage}/>
+        <Paginator currentPage={currentPage} pageCount={10} setPage={this.changePage}/>
       </div>
     )
   }
