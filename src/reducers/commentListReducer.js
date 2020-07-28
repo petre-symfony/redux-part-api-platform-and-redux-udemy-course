@@ -5,8 +5,14 @@ import {
   COMMENT_LIST_UNLOAD,
   COMMENT_ADD
 } from "../actions/types";
+import { hydraPageCount } from '../apiUtils';
 
-export default (state = {comments:null, isFetching: true}, action) => {
+export default (state = {
+  comments:null,
+  isFetching: true,
+  currentPage: 1,
+  pageCount: null
+}, action) => {
   switch(action.type){
     case COMMENT_LIST_REQUEST:
       state = {
@@ -23,7 +29,9 @@ export default (state = {comments:null, isFetching: true}, action) => {
       state =  {
         ...state,
         comments: action.payload['hydra:member'],
-        isFetching: false
+        isFetching: false,
+        currentPage: state.currentPage + 1,
+        pageCount: hydraPageCount(action.payload)
       };
       return state;
     case COMMENT_LIST_ERROR:
@@ -31,7 +39,9 @@ export default (state = {comments:null, isFetching: true}, action) => {
       return {
         ...state,
         isFetching: false,
-        comments: null
+        comments: null,
+        currentPage: 1,
+        pageCount: null
       }
     default:
       return state;

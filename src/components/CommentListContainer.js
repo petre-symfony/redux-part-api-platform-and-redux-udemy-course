@@ -15,8 +15,22 @@ class CommentListContainer extends React.Component{
     this.props.commentListUnload();
   }
 
+  onLoadMoreClick = () => {
+    const {blogPostId, currentPage, commentListFetch} = this.props;
+
+    commentListFetch(blogPostId, currentPage);
+  }
+
   render(){
-    const { comments, isFetching, isAuthenticated, blogPostId } = this.props;
+    const {
+      comments,
+      isFetching,
+      isAuthenticated,
+      blogPostId,
+      currentPage,
+      pageCount
+    } = this.props;
+    const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
     if(isFetching){
       return (
@@ -27,7 +41,13 @@ class CommentListContainer extends React.Component{
     return (
       <div>
         <CommentList comments={comments} />
-        <LoadMore label="Load more comments..."/>
+        {showLoadMore &&
+          <LoadMore
+            label="Load more comments..."
+            onClick={this.onLoadMoreClick}
+            disabled={isFetching}
+          />
+        }
         {isAuthenticated  && <CommentForm blogPostId={blogPostId}/>}
       </div>
     )

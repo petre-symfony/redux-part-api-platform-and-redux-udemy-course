@@ -61,8 +61,8 @@ export const blogPostUnload = () => ({
   type: BLOG_POST_UNLOAD
 });
 
-export const commentListFetch = (id) => (dispatch) => (
-  requests.get(`/blog_posts/${id}/comments`)
+export const commentListFetch = (id, page=1) => (dispatch) => (
+  requests.get(`/blog_posts/${id}/comments?page=${page}`)
     .then(response => dispatch({type: COMMENT_LIST_RECEIVED, payload: response}))
     .catch(error => dispatch({type: COMMENT_LIST_ERROR, payload: error}))
 )
