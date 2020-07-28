@@ -13,7 +13,7 @@ class Paginator extends React.Component{
     }
   }
   render(){
-    const {currentPage, setPage} = this.props;
+    const {currentPage, setPage, prevPage, nextPage} = this.props;
 
     return (
       <div className="card mb-3 mt-3 shadow-sm">
@@ -21,7 +21,7 @@ class Paginator extends React.Component{
           <nav>
             <ul className="pagination">
               <li className="page-item">
-                <button className="page-link">Previous</button>
+                <button className="page-link" onClick={prevPage}>Previous</button>
               </li>
               {
                 this.range.map(page => {
@@ -39,7 +39,7 @@ class Paginator extends React.Component{
                 })
               }
               <li className="page-item">
-                <button className="page-link">Next</button>
+                <button className="page-link" onClick={nextPage}>Next</button>
               </li>
             </ul>
           </nav>
