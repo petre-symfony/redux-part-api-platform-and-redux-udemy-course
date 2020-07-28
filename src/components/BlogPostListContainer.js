@@ -34,7 +34,7 @@ class BlogPostListContainer extends React.Component {
   }
 
   render(){
-    const { posts, isFetching, currentPage, blogPostListSetPage } = this.props;
+    const { posts, isFetching, currentPage, pageCount, blogPostListSetPage } = this.props;
 
     if(isFetching){
       return (
@@ -45,7 +45,7 @@ class BlogPostListContainer extends React.Component {
     return (
       <div>
         <BlogPostList posts={posts}/>
-        <Paginator currentPage={currentPage} pageCount={10} setPage={this.changePage}/>
+        <Paginator currentPage={currentPage} pageCount={pageCount} setPage={this.changePage}/>
       </div>
     )
   }
