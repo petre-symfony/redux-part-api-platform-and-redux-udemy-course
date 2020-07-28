@@ -41,7 +41,7 @@ class App extends React.Component {
       <div>
         <Router history={history}>
           <Header isAuthenticated={isAuthenticated} userData={userData} logout={userLogout}/>
-          <Route path="/" exact component={BlogPostListContainer} />
+          <Route path="/:page(\d+)?" exact component={BlogPostListContainer} />
           <Route path="/login" exact component={LoginForm}/>
           <Route path="/blog_posts/:id" exact component={BlogPostContainer}/>
         </Router>

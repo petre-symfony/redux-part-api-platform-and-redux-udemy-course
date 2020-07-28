@@ -11,11 +11,21 @@ class BlogPostListContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if(prevProps.currentPage !== this.props.currentPage){
-      this.props.blogPostsListFetch(this.props.currentPage);
+    const {currentPage, blogPostsListFetch, blogPostListSetPage} = this.props;
+
+    if(prevProps.match.params.page !== this.getQueryParamPage()){
+      blogPostListSetPage(this.getQueryParamPage());
+    }
+    
+    if(prevProps.currentPage !== currentPage){
+      blogPostsListFetch(currentPage);
     }
   }
-  
+
+  getQueryParamPage = () => {
+    return Number(this.props.match.params.page) || 1;
+  }
+
   render(){
     const { posts, isFetching, currentPage, blogPostListSetPage } = this.props;
 
