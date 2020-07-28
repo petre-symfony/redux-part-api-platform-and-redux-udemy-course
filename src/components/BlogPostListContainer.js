@@ -3,6 +3,7 @@ import BlogPostList from "./BlogPostList";
 import { connect } from 'react-redux';
 import { blogPostsListFetch } from '../actions';
 import Spinner from "./Spinner";
+import Paginator from "./Paginator";
 
 class BlogPostListContainer extends React.Component {
   componentDidMount() {
@@ -19,7 +20,10 @@ class BlogPostListContainer extends React.Component {
     }
 
     return (
-      <BlogPostList posts={posts}/>
+      <div>
+        <BlogPostList posts={posts}/>
+        <Paginator />
+      </div>
     )
   }
 }
