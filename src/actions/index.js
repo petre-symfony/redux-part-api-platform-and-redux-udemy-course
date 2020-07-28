@@ -114,7 +114,7 @@ export const userLogout = () => ({
 export const userProfileFetch = userId => dispatch => (
   requests.get(`/users/${userId}`, true)
     .then(response => dispatch(userProfileReceived(userId, response)))
-    .catch(error => dispatch(userProfileError()))
+    .catch(error => dispatch(userProfileError(userId)))
 );
 
 export const userProfileReceived = (userId, userData) => ({
@@ -123,8 +123,9 @@ export const userProfileReceived = (userId, userData) => ({
   userId
 });
 
-export const userProfileError = () => ({
-  type: USER_PROFILE_ERROR
+export const userProfileError = (userId) => ({
+  type: USER_PROFILE_ERROR,
+  userId
 })
 
 export const userSetId = (userId) => ({
