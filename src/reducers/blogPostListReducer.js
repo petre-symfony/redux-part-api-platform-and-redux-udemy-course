@@ -1,11 +1,17 @@
 import {
   BLOG_POST_LIST_REQUEST,
   BLOG_POST_LIST_RECEIVED,
-  BLOG_POST_LIST_ERROR
+  BLOG_POST_LIST_ERROR,
+  BLOG_POST_LIST_SET_PAGE
 } from "../actions/types";
 
 
-export default (state = {posts:null, isFetching: true}, action) => {
+export default (state = {
+  posts:null,
+  isFetching: true,
+  currentPage: 1,
+  pageCount: null
+}, action) => {
   switch(action.type){
     case BLOG_POST_LIST_REQUEST:
       state = {
@@ -25,6 +31,11 @@ export default (state = {posts:null, isFetching: true}, action) => {
         ...state,
         isFetching: false,
         posts: null
+      }
+    case BLOG_POST_LIST_SET_PAGE:
+      return {
+        ...state,
+        currentPage: action.page
       }
     default:
       return state;

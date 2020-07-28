@@ -4,6 +4,7 @@ import {
   BLOG_POST_RECEIVED,
   BLOG_POST_ERROR,
   BLOG_POST_UNLOAD,
+  BLOG_POST_LIST_SET_PAGE,
   COMMENT_LIST_RECEIVED,
   COMMENT_LIST_ERROR,
   COMMENT_LIST_UNLOAD,
@@ -33,6 +34,11 @@ export const blogPostListError = (error) => ({
 export const blogPostListReceived = (data) => ({
   type: BLOG_POST_LIST_RECEIVED,
   payload: data
+});
+
+export const blogPostListSetPage = (page) => ({
+  type: BLOG_POST_LIST_SET_PAGE,
+  page
 });
 
 export const blogPostFetch = (id) => (dispatch) => (
