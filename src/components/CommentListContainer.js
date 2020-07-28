@@ -4,6 +4,7 @@ import { commentListFetch, commentListUnload } from "../actions";
 import Spinner from "./Spinner";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
+import LoadMore from "./LoadMore";
 
 class CommentListContainer extends React.Component{
   componentDidMount() {
@@ -26,6 +27,7 @@ class CommentListContainer extends React.Component{
     return (
       <div>
         <CommentList comments={comments} />
+        <LoadMore label="Load more comments..."/>
         {isAuthenticated  && <CommentForm blogPostId={blogPostId}/>}
       </div>
     )
