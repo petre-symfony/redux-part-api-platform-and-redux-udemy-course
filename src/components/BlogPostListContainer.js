@@ -10,6 +10,12 @@ class BlogPostListContainer extends React.Component {
     this.props.blogPostsListFetch();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevProps.currentPage !== this.props.currentPage){
+      this.props.blogPostsListFetch(this.props.currentPage);
+    }
+  }
+  
   render(){
     const { posts, isFetching, currentPage, blogPostListSetPage } = this.props;
 

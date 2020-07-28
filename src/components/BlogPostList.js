@@ -18,6 +18,9 @@ class BlogPostList extends React.Component {
             <div className="card mb-3 mt-3 shadow-sm" key={post.id}>
               <div className="card-body">
                 <Link to={`blog_posts/${post.id}`}>{post.title}</Link>
+                <p className="card-text">
+                  {post.content}
+                </p>
                 <p className="bordet-top card-text">
                   <small className="text-muted">
                     {format(post.created)} by &nbsp;

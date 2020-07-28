@@ -19,8 +19,8 @@ import requests from '../agent';
 import {SubmissionError} from 'redux-form';
 import {parseApiErrors} from '../apiUtils';
 
-export const blogPostsListFetch = () => (dispatch) => {
-  requests.get('/blog_posts')
+export const blogPostsListFetch = (page = 1) => (dispatch) => {
+  requests.get(`/blog_posts?page=${page}`)
     .then(response => dispatch({type: BLOG_POST_LIST_RECEIVED, payload: response}))
     .catch(error => dispatch({type: BLOG_POST_LIST_ERROR, payload: error}))
   ;
