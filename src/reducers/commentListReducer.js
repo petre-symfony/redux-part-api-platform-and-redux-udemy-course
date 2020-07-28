@@ -28,7 +28,8 @@ export default (state = {
     case COMMENT_LIST_RECEIVED:
       state =  {
         ...state,
-        comments: action.payload['hydra:member'],
+        comments: !state.comments ? action.payload['hydra:member'] :
+          state.comments.concat(action.payload['hydra:member']),
         isFetching: false,
         currentPage: state.currentPage + 1,
         pageCount: hydraPageCount(action.payload)

@@ -32,7 +32,7 @@ class CommentListContainer extends React.Component{
     } = this.props;
     const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
-    if(isFetching){
+    if(isFetching && currentPage === 1){
       return (
         <Spinner />
       );
