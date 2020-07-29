@@ -34,7 +34,7 @@ class BlogPostForm extends React.Component {
             <Field name="content" label="Content" type="textarea" component={renderField} />
 
             <ImageUpload />
-            
+
             <button type="submit" disabled={submitting} className="btn btn-primary btn-big btn-block">Add Blog Post</button>
           </form>
         </div>
