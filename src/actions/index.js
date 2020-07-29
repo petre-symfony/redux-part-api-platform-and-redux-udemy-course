@@ -13,7 +13,8 @@ import {
   USER_PROFILE_RECEIVED,
   USER_PROFILE_ERROR,
   USER_SET_ID,
-  USER_LOGOUT
+  USER_LOGOUT,
+  USER_REGISTER_SUCCESS
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -142,9 +143,14 @@ export const userSetId = (userId) => ({
   userId
 })
 
-export const userRegister = (username, name, plainPassword, retypedPassword, email) => dispatch => (
+export const userRegister = (username, name, email, plainPassword, retypedPassword) => dispatch => (
   requests.post('/users', {username, name, plainPassword, retypedPassword, email}, false)
+    .then(response => dispatch(userRegisterSuccess()))
     .catch(error => {
       throw new SubmissionError(parseApiErrors(error))
     })
 );
+
+export const userRegisterSuccess = () => ({
+  type: USER_REGISTER_SUCCESS
+})

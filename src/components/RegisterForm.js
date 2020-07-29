@@ -21,7 +21,6 @@ class RegisterForm extends React.Component{
     return userRegister(...Object.values(values))
       .then(() => {
         reset();
-        history.push("/");
       });
   }
 
@@ -39,8 +38,8 @@ class RegisterForm extends React.Component{
         <div className="card-body">
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <Field name="username" label="username" type="text" component={renderField} />
-            <Field name="email" label="email" type="text" component={renderField} />
             <Field name="name" label="name" type="text" component={renderField} />
+            <Field name="email" label="email" type="text" component={renderField} />
             <Field name="plainPassword" label="password" type="password" component={renderField} />
             <Field name="retypedPassword" label="Re-type password" type="password" component={renderField} />
 
