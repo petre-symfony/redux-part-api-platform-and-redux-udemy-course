@@ -60,6 +60,23 @@ export const blogPostReceived = (data) => ({
   payload: data
 });
 
+export const blogPostAdd = (title, content) => dispatch => (
+  requests.post('/blog_posts', {
+    title,
+    content
+  })
+    .catch(error => {
+      if (401 === error.response.status){
+        return dispatch(userLogout());
+      } else if (403 === error.response.status) {
+        throw new SubmissionError({
+          _error: 'You do not have rights to publish blog posts!'
+        })
+      }
+      throw new SubmissionError(parseApiErrors(error))
+    })
+);
+
 export const blogPostUnload = () => ({
   type: BLOG_POST_UNLOAD
 });
