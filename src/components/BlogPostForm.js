@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from "react-router";
 import { canWritePost } from '../apiUtils';
 import { renderField } from '../form';
-import { blogPostAdd } from '../actions';
+import { blogPostAdd,blogPostFormUnload } from '../actions';
 import ImageUpload from "./ImageUpload";
 import ImageBrowser from "./ImageBrowser";
 
@@ -17,6 +17,10 @@ class BlogPostForm extends React.Component {
         reset();
         history.push("/");
       })
+  }
+
+  componentWillUnmount() {
+    this.props.blogPostFormUnload();
   }
 
   render() {
@@ -60,5 +64,5 @@ export default reduxForm({
   form: 'BlogPostForm'
 })(connect(
   mapStateToProps,
-  { blogPostAdd }
+  { blogPostAdd, blogPostFormUnload }
 )(BlogPostForm));

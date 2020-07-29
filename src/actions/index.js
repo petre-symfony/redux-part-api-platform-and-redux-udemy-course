@@ -19,7 +19,8 @@ import {
   USER_REGISTER_COMPLETE,
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
-  IMAGE_UPLOADED
+  IMAGE_UPLOADED,
+  BLOG_POST_FORM_UNLOAD
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -83,6 +84,10 @@ export const blogPostAdd = (title, content, images = []) => dispatch => (
 
 export const blogPostUnload = () => ({
   type: BLOG_POST_UNLOAD
+});
+
+export const blogPostFormUnload = () => ({
+  type: BLOG_POST_FORM_UNLOAD
 });
 
 export const commentListFetch = (id, page=1) => (dispatch) => (

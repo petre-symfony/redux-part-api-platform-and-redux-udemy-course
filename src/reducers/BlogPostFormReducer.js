@@ -1,7 +1,8 @@
 import {
   IMAGE_UPLOAD_REQUEST,
   IMAGE_UPLOAD_ERROR,
-  IMAGE_UPLOADED
+  IMAGE_UPLOADED,
+  BLOG_POST_FORM_UNLOAD
 } from '../actions/types';
 export default (state = {
   isImageUploading: false,
@@ -25,6 +26,13 @@ export default (state = {
       return {
         ...state,
         isImageUploading: false
+      }
+    case BLOG_POST_FORM_UNLOAD:
+      return {
+        ...state,
+        isImageUploading: false,
+        image: null,
+        images: []
       }
     default:
       return state
