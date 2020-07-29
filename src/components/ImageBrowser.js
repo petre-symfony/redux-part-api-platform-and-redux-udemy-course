@@ -7,7 +7,7 @@ class ImageBrowser extends React.Component {
 
     return (
       <div className="nav mt-4 mb-4">
-        <TransitionGroup >
+        <TransitionGroup component={null}>
           {images.map(image => {
             return (
               <CSSTransition timeout={1000} classNames="fade" key={image.id}>
@@ -17,6 +17,11 @@ class ImageBrowser extends React.Component {
                       src={`http://localhost:8000/${image.url}`}
                       className="img-fluid"
                     />
+                  </div>
+                  <div className="mb-2">
+                    <button type="button" className="btn btn-outline-danger btn-sm">
+                       Remove
+                    </button>
                   </div>
                 </div>
               </CSSTransition>
