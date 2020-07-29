@@ -1,4 +1,7 @@
-import {USER_REGISTER_SUCCESS} from '../actions/types';
+import {
+  USER_REGISTER_SUCCESS,
+  USER_CONFIRMATION_SUCCESS
+} from '../actions/types';
 
 export default (state = {
   registrationSuccess: false,
@@ -9,6 +12,11 @@ export default (state = {
       return {
         ...state,
         registrationSuccess: true
+      }
+    case USER_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        confirmationSuccess: true
       }
     default:
       return state

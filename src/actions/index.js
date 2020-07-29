@@ -14,7 +14,8 @@ import {
   USER_PROFILE_ERROR,
   USER_SET_ID,
   USER_LOGOUT,
-  USER_REGISTER_SUCCESS
+  USER_REGISTER_SUCCESS,
+  USER_CONFIRMATION_SUCCESS
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -154,3 +155,17 @@ export const userRegister = (username, name, email, plainPassword, retypedPasswo
 export const userRegisterSuccess = () => ({
   type: USER_REGISTER_SUCCESS
 })
+
+export const userConfirm = (confirmationToken) => dispatch => (
+  requests.post('/users/confirm', {confirmationToken}, false)
+    .then(response => dispatch(userConfirmationSuccess()))
+    .catch(error => {
+      throw new SubmissionError({
+        _error: 'Confirmation token is invalid'
+      })
+    })
+);
+
+export const userConfirmationSuccess = () => ({
+  type: USER_CONFIRMATION_SUCCESS
+});
