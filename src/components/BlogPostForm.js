@@ -29,7 +29,7 @@ class BlogPostForm extends React.Component {
       submitting,
       error,
       images,
-      isImageUploading,
+      imageRequestInProgress,
       imageDelete
     } = this.props;
 
@@ -46,11 +46,15 @@ class BlogPostForm extends React.Component {
             <Field name="content" label="Content" type="textarea" component={renderField} />
 
             <ImageUpload />
-            <ImageBrowser images={images} deleteHandler={imageDelete}/>
+            <ImageBrowser
+              images={images}
+              deleteHandler={imageDelete}
+              isLocked={imageRequestInProgress}
+            />
 
             <button
                 type="submit"
-                disabled={submitting || isImageUploading}
+                disabled={submitting || imageRequestInProgress}
                 className="btn btn-primary btn-big btn-block"
             >
               Add Blog Post

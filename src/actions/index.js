@@ -21,6 +21,7 @@ import {
   IMAGE_UPLOAD_REQUEST,
   IMAGE_UPLOADED,
   IMAGE_DELETED,
+  IMAGE_DELETE_REQUEST,
   BLOG_POST_FORM_UNLOAD
 } from "./types";
 import requests from '../agent';
@@ -222,10 +223,15 @@ export const imageUploaded = (data) => ({
   image: data
 })
 
-export const imageDelete = id => dispatch => (
-  requests.delete(`/images/${id}`)
+export const imageDeleteRequest = () => ({
+  type: IMAGE_DELETE_REQUEST
+});
+
+export const imageDelete = id => dispatch => {
+  dispatch(imageDeleteRequest());
+  return requests.delete(`/images/${id}`)
     .then(response => dispatch(imageDeleted(id)))
-);
+};
 
 export const imageDeleted = id => ({
   type: IMAGE_DELETED,
