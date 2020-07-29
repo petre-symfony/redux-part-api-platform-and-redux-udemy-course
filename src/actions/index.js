@@ -63,10 +63,11 @@ export const blogPostReceived = (data) => ({
   payload: data
 });
 
-export const blogPostAdd = (title, content) => dispatch => (
+export const blogPostAdd = (title, content, images = []) => dispatch => (
   requests.post('/blog_posts', {
     title,
-    content
+    content,
+    images: images.map(image => `/api/images/${image.id}`)
   })
     .catch(error => {
       if (401 === error.response.status){

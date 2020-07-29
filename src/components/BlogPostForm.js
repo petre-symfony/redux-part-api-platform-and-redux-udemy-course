@@ -10,9 +10,9 @@ import ImageBrowser from "./ImageBrowser";
 
 class BlogPostForm extends React.Component {
   onSubmit = values =>{
-    const {blogPostAdd, reset, history} = this.props;
+    const {blogPostAdd, reset, history, images} = this.props;
 
-    return blogPostAdd(values.title, values.content)
+    return blogPostAdd(values.title, values.content, images)
       .then(() => {
         reset();
         history.push("/");
