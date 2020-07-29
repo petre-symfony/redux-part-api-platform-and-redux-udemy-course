@@ -43,7 +43,7 @@ class RegisterForm extends React.Component{
             <Field name="name" label="name" type="text" component={renderField} />
             <Field name="plainPassword" label="password" type="password" component={renderField} />
             <Field name="retypedPassword" label="Re-type password" type="password" component={renderField} />
-            
+
             <div className="form-check form-group">
               <input
                 type="checkbox"
