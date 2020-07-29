@@ -221,3 +221,7 @@ export const imageUploaded = (data) => ({
   image: data
 })
 
+export const imageDelete = id => dispatch => (
+  requests.delete(`/images/${id}`)
+);
+

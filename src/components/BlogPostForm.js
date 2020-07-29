@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from "react-router";
 import { canWritePost } from '../apiUtils';
 import { renderField } from '../form';
-import { blogPostAdd,blogPostFormUnload } from '../actions';
+import { blogPostAdd,blogPostFormUnload, imageDelete } from '../actions';
 import ImageUpload from "./ImageUpload";
 import ImageBrowser from "./ImageBrowser";
 
@@ -24,7 +24,14 @@ class BlogPostForm extends React.Component {
   }
 
   render() {
-    const {handleSubmit, submitting, error, images, isImageUploading} = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      error,
+      images,
+      isImageUploading,
+      imageDelete
+    } = this.props;
 
     if(!canWritePost(this.props.userData)){
       return <Redirect to="/login"></Redirect>
@@ -39,7 +46,7 @@ class BlogPostForm extends React.Component {
             <Field name="content" label="Content" type="textarea" component={renderField} />
 
             <ImageUpload />
-            <ImageBrowser images={images}/>
+            <ImageBrowser images={images} deleteHandler={imageDelete}/>
 
             <button
                 type="submit"
@@ -64,5 +71,5 @@ export default reduxForm({
   form: 'BlogPostForm'
 })(connect(
   mapStateToProps,
-  { blogPostAdd, blogPostFormUnload }
+  { blogPostAdd, blogPostFormUnload, imageDelete }
 )(BlogPostForm));
