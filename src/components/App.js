@@ -5,6 +5,7 @@ import history from '../history';
 import LoginForm from "./LoginForm";
 import BlogPostListContainer from "./BlogPostListContainer";
 import BlogPostContainer from "./BlogPostContainer";
+import RegisterForm from "./RegisterForm";
 import Header from "./Header";
 import requests from "../agent";
 import { userProfileFetch, userSetId, userLogout } from '../actions';
@@ -43,6 +44,7 @@ class App extends React.Component {
           <Header isAuthenticated={isAuthenticated} userData={userData} logout={userLogout}/>
           <Route path="/:page(\d+)?" exact component={BlogPostListContainer} />
           <Route path="/login" exact component={LoginForm}/>
+          <Route path="/register" exact component={RegisterForm}/>
           <Route path="/blog_posts/:id" exact component={BlogPostContainer}/>
         </Router>
       </div>
