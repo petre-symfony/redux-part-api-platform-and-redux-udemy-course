@@ -5,6 +5,7 @@ import { Redirect } from "react-router";
 import { canWritePost } from '../apiUtils';
 import { renderField } from '../form';
 import { blogPostAdd } from '../actions';
+import ImageUpload from "./ImageUpload";
 
 class BlogPostForm extends React.Component {
   onSubmit = values =>{
@@ -32,6 +33,8 @@ class BlogPostForm extends React.Component {
             <Field name="title" label="Title" type="text" component={renderField} />
             <Field name="content" label="Content" type="textarea" component={renderField} />
 
+            <ImageUpload />
+            
             <button type="submit" disabled={submitting} className="btn btn-primary btn-big btn-block">Add Blog Post</button>
           </form>
         </div>
