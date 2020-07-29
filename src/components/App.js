@@ -3,6 +3,7 @@ import { Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import history from '../history';
 import LoginForm from "./LoginForm";
+import BlogPostForm from "./BlogPostForm";
 import BlogPostListContainer from "./BlogPostListContainer";
 import BlogPostContainer from "./BlogPostContainer";
 import RegistrationContainer from "./RegistrationContainer";
@@ -45,6 +46,7 @@ class App extends React.Component {
           <Route path="/:page(\d+)?" exact component={BlogPostListContainer} />
           <Route path="/login" exact component={LoginForm}/>
           <Route path="/register" exact component={RegistrationContainer}/>
+          <Route path="/blog_post-form" exact component={BlogPostForm}/>
           <Route path="/blog_posts/:id" exact component={BlogPostContainer}/>
         </Router>
       </div>
