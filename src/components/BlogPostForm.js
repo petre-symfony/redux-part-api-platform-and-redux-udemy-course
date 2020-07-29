@@ -6,6 +6,7 @@ import { canWritePost } from '../apiUtils';
 import { renderField } from '../form';
 import { blogPostAdd } from '../actions';
 import ImageUpload from "./ImageUpload";
+import ImageBrowser from "./ImageBrowser";
 
 class BlogPostForm extends React.Component {
   onSubmit = values =>{
@@ -19,7 +20,7 @@ class BlogPostForm extends React.Component {
   }
 
   render() {
-    const {handleSubmit, submitting, error} = this.props;
+    const {handleSubmit, submitting, error, images} = this.props;
 
     if(!canWritePost(this.props.userData)){
       return <Redirect to="/login"></Redirect>
@@ -34,6 +35,7 @@ class BlogPostForm extends React.Component {
             <Field name="content" label="Content" type="textarea" component={renderField} />
 
             <ImageUpload />
+            <ImageBrowser images={images}/>
 
             <button type="submit" disabled={submitting} className="btn btn-primary btn-big btn-block">Add Blog Post</button>
           </form>
@@ -44,7 +46,8 @@ class BlogPostForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userData: state.auth.userData
+  userData: state.auth.userData,
+  ...state.blogPostForm
 })
 
 export default reduxForm({
