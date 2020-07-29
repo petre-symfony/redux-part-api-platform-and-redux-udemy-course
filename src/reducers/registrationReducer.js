@@ -1,5 +1,6 @@
 import {
   USER_REGISTER_SUCCESS,
+  USER_REGISTER_COMPLETE,
   USER_CONFIRMATION_SUCCESS
 } from '../actions/types';
 
@@ -17,6 +18,12 @@ export default (state = {
       return {
         ...state,
         confirmationSuccess: true
+      }
+    case USER_REGISTER_COMPLETE:
+      return {
+        ...state,
+        registrationSuccess: false,
+        confirmationSuccess: false
       }
     default:
       return state

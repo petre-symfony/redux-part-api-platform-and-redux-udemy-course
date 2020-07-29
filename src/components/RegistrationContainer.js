@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import React from "react";
 import ConfirmationForm from './ConfirmationForm';
 import RegisterForm from './RegisterForm';
+import {userRegisterComplete} from '../actions';
 
 class RegistrationContainer extends React.Component {
   render() {
@@ -16,6 +17,14 @@ class RegistrationContainer extends React.Component {
     if(!confirmationSuccess){
       return <ConfirmationForm />
     }
+
+    return (
+      <div className="card mb-3 mt-3 shadow-sm">
+        <div className="card-body">
+          <h2>Congratulation!</h2>
+        </div>
+      </div>
+    )
   }
 }
 
@@ -25,5 +34,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  {userRegisterComplete}
 )(RegistrationContainer);

@@ -15,7 +15,8 @@ import {
   USER_SET_ID,
   USER_LOGOUT,
   USER_REGISTER_SUCCESS,
-  USER_CONFIRMATION_SUCCESS
+  USER_CONFIRMATION_SUCCESS,
+  USER_REGISTER_COMPLETE
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -168,4 +169,8 @@ export const userConfirm = (confirmationToken) => dispatch => (
 
 export const userConfirmationSuccess = () => ({
   type: USER_CONFIRMATION_SUCCESS
+});
+
+export const userRegisterComplete = () => ({
+  type: USER_REGISTER_COMPLETE
 });
