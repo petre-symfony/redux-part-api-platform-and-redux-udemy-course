@@ -1,11 +1,19 @@
 import React from "react";
+import { connect } from 'react-redux';
+import {imageUpload} from '../actions';
 import './ImageUpload.css';
 
-export default class ImageUpload extends React.Component {
+class ImageUpload extends React.Component {
+  onChange = e => {
+    const file = e.target.files[0];
+    this.props.imageUpload(file);
+  }
+
   render() {
     return (
       <div className="form-group nice-image-upload">
         <input type="file"
+           onChange={this.onChange}
            className="form-control-file text-primary font-weight-bold"
            data-title="Click me or drag and drop file"
         />
@@ -13,3 +21,8 @@ export default class ImageUpload extends React.Component {
     )
   }
 }
+
+export default connect(
+  null,
+  {imageUpload}
+)(ImageUpload);

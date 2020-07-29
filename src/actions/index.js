@@ -16,7 +16,10 @@ import {
   USER_LOGOUT,
   USER_REGISTER_SUCCESS,
   USER_CONFIRMATION_SUCCESS,
-  USER_REGISTER_COMPLETE
+  USER_REGISTER_COMPLETE,
+  IMAGE_UPLOAD_ERROR,
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOADED
 } from "./types";
 import requests from '../agent';
 import {SubmissionError} from 'redux-form';
@@ -191,3 +194,24 @@ export const userConfirmationSuccess = () => ({
 export const userRegisterComplete = () => ({
   type: USER_REGISTER_COMPLETE
 });
+
+export const imageUpload = file => dispatch => {
+  dispatch(imageUploadedRequest());
+  return requests.upload('/images', file)
+    .then(response => dispatch(imageUploaded(response)))
+    .catch(error => dispatch(imageUploadError()))
+}
+
+export const imageUploadedRequest = () => ({
+  type: IMAGE_UPLOAD_REQUEST
+})
+
+export const imageUploadError = (error) => ({
+  type: IMAGE_UPLOAD_ERROR
+})
+
+export const imageUploaded = (data) => ({
+  type: IMAGE_UPLOADED,
+  image: data
+})
+

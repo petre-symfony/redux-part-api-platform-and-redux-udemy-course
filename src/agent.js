@@ -24,6 +24,12 @@ const requests = {
     return superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin(secured))
       .then(responseBody)
   },
+  upload: (url, file, secured = true) => {
+    return superagent.post(`${API_ROOT}${url}`)
+      .attach('file', file)
+      .use(tokenPlugin(secured))
+      .then(responseBody)
+  },
   setToken: (newJwtToken) => token = newJwtToken
 }
 
