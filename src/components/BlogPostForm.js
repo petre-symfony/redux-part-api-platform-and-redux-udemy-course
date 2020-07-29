@@ -20,7 +20,7 @@ class BlogPostForm extends React.Component {
   }
 
   render() {
-    const {handleSubmit, submitting, error, images} = this.props;
+    const {handleSubmit, submitting, error, images, isImageUploading} = this.props;
 
     if(!canWritePost(this.props.userData)){
       return <Redirect to="/login"></Redirect>
@@ -37,7 +37,13 @@ class BlogPostForm extends React.Component {
             <ImageUpload />
             <ImageBrowser images={images}/>
 
-            <button type="submit" disabled={submitting} className="btn btn-primary btn-big btn-block">Add Blog Post</button>
+            <button
+                type="submit"
+                disabled={submitting || isImageUploading}
+                className="btn btn-primary btn-big btn-block"
+            >
+              Add Blog Post
+            </button>
           </form>
         </div>
       </div>

@@ -6,7 +6,6 @@ class ImageBrowser extends React.Component {
 
     return (
       <div className="nav mt-4 mb-4">
-        Nothing here yet!
         {images.map(image => {
           return (
             <div key={image.id} className="col-md-6 col-lg-4">
