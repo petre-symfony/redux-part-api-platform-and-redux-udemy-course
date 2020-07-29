@@ -1,6 +1,8 @@
 import React from "react";
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
+import { connect } from 'react-redux';
 import {renderField} from '../form';
+import { userRegister } from '../actions';
 
 class RegisterForm extends React.Component{
   constructor(props) {
@@ -14,7 +16,13 @@ class RegisterForm extends React.Component{
   }
 
   onSubmit = values => {
-    console.log(values);
+    const {userRegister, reset, history} = this.props;
+
+    return userRegister(...Object.values(values))
+      .then(() => {
+        reset();
+        history.push("/");
+      });
   }
 
   onTermsAcceptedClick = e => {
@@ -31,11 +39,11 @@ class RegisterForm extends React.Component{
         <div className="card-body">
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <Field name="username" label="username" type="text" component={renderField} />
-            <Field name="password" label="password" type="password" component={renderField} />
-            <Field name="retypedPassword" label="Re-type password" type="password" component={renderField} />
             <Field name="email" label="email" type="text" component={renderField} />
             <Field name="name" label="name" type="text" component={renderField} />
-
+            <Field name="plainPassword" label="password" type="password" component={renderField} />
+            <Field name="retypedPassword" label="Re-type password" type="password" component={renderField} />
+            
             <div className="form-check form-group">
               <input
                 type="checkbox"
@@ -62,5 +70,9 @@ class RegisterForm extends React.Component{
 
 export default reduxForm({
   form: 'RegisterForm'
-})(RegisterForm);
+})(
+connect(
+  null,
+  {userRegister}
+)(RegisterForm));
 

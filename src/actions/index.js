@@ -142,4 +142,9 @@ export const userSetId = (userId) => ({
   userId
 })
 
-
+export const userRegister = (username, name, plainPassword, retypedPassword, email) => dispatch => (
+  requests.post('/users', {username, name, plainPassword, retypedPassword, email}, false)
+    .catch(error => {
+      throw new SubmissionError(parseApiErrors(error))
+    })
+);
