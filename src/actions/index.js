@@ -20,6 +20,7 @@ import {
   IMAGE_UPLOAD_ERROR,
   IMAGE_UPLOAD_REQUEST,
   IMAGE_UPLOADED,
+  IMAGE_DELETED,
   BLOG_POST_FORM_UNLOAD
 } from "./types";
 import requests from '../agent';
@@ -223,5 +224,11 @@ export const imageUploaded = (data) => ({
 
 export const imageDelete = id => dispatch => (
   requests.delete(`/images/${id}`)
+    .then(response => dispatch(imageDeleted(id)))
 );
+
+export const imageDeleted = id => ({
+  type: IMAGE_DELETED,
+  imageId: id
+})
 
